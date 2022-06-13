@@ -53,7 +53,11 @@
 
             // If media query matches
             if (phoneQuery.matches) { 
-                luckydraw('touchstart', 'touchmove', 'touchend')
+
+                canvas.addEventListener('touchstart',()=>{
+                    alert('touchstart')
+                })
+                // luckydraw('touchstart', 'touchmove', 'touchend')
             } else {
                 luckydraw('mousedown', 'mousemove', 'mouseup')
             }
