@@ -56,12 +56,12 @@
 
 
                 canvas.addEventListener('touchstart', () => {
-                    isDraw = true;
+                    // isDraw = true;
                     console.log("isDraw:" + isDraw)
                 });
 
                 canvas.addEventListener('touchmove', (event) => {
-                    if (!isDraw) return;
+                    // if (!isDraw) return;
                     const point = getClientOffset(event);
 
                     const x = point.x;
@@ -74,9 +74,9 @@
 
                 });
 
-                canvas.addEventListener('touchend', () => {
-                    isDraw = false;
-                })
+                // canvas.addEventListener('touchend', () => {
+                //     isDraw = false;
+                // })
                 // luckydraw('touchstart', 'touchmove', 'touchend')
             } else {
                 luckydraw('mousedown', 'mousemove', 'mouseup')
