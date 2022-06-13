@@ -21,8 +21,8 @@
         }
 
         .card-wrapper {
-            width: 150px;
-            height: 50px;
+            width: 300px;
+            height: 300px;
             background-color: rgb(254, 155, 15);
             background-image: url("https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80");
             background-size: cover;
@@ -33,7 +33,7 @@
 
 <body>
     <div class="card-wrapper">
-        <canvas id="canvas" width="150" height="50">
+        <canvas id="canvas" width="300" height="300">
 
         </canvas>
 
@@ -43,8 +43,8 @@
         const canvas = document.querySelector('#canvas');
         const phoneQuery = window.matchMedia("(max-width: 768px)")
         const ctx = canvas.getContext('2d');
-        const width = 150;
-        const height = 50;
+        const width = 300;
+        const height = 300;
         let isDraw = false;
 
         // 判斷瀏覽器是否支援canvas
