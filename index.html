@@ -26,6 +26,7 @@
             background-color: rgb(254, 155, 15);
             background-image: url("https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80");
             background-size: cover;
+            /* 固定card位置 讓刮的時候不會滑來滑去 */
             position: fixed;
         }
     </style>
@@ -74,7 +75,6 @@
                 if (!isDraw) return;
 
                 const point = getClientOffset(event);
-                console.log(point)
 
                 const x = point.x;
                 const y = point.y;
@@ -117,9 +117,10 @@
 
 
         // 判斷刮刮樂-透明區塊百分比 
-        const getFilledPercentage = (ctx) => {
+        function getFilledPercentage(ctx){
             const imgData = ctx.getImageData(0, 0, width, height);
             let pixels = imgData.data;
+            console.log(pixels)
 
             let n = 0;
             for (let i = 0; i < pixels.length; i += 1) {
