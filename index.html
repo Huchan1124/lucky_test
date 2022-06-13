@@ -14,9 +14,15 @@
             padding: 0;
         }
 
+        body {
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
         .card-wrapper {
-            width: 375px;
-            height: 300px;
+            width: 150px;
+            height: 50px;
             background-color: rgb(254, 155, 15);
             background-image: url("https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80");
             background-size: cover;
@@ -26,7 +32,7 @@
 
 <body>
     <div class="card-wrapper">
-        <canvas id="canvas" width="375" height="300">
+        <canvas id="canvas" width="150" height="50">
 
         </canvas>
 
@@ -36,8 +42,8 @@
         const canvas = document.querySelector('#canvas');
         const phoneQuery = window.matchMedia("(max-width: 768px)")
         const ctx = canvas.getContext('2d');
-        const width = 375;
-        const height = 300;
+        const width = 150;
+        const height = 50;
         let isDraw = false;
 
         // 判斷瀏覽器是否支援canvas
@@ -107,7 +113,6 @@
                 return point;
             }
         }
-
 
 
         // 判斷刮刮樂-透明區塊百分比 
