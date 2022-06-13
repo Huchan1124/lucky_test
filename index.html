@@ -52,10 +52,30 @@
             ctx.fillRect(0, 0, width, height);
 
             // If media query matches
-            if (phoneQuery.matches) { 
+            if (phoneQuery.matches) {
 
-                canvas.addEventListener('touchstart',()=>{
-                    alert('touchstart')
+
+                canvas.addEventListener('touchstart', () => {
+                    isDraw = true;
+                    console.log("isDraw:" + isDraw)
+                });
+
+                canvas.addEventListener('touchmove', (event) => {
+                    if (!isDraw) return;
+                    const point = getClientOffset(event);
+
+                    const x = point.x;
+                    const y = point.y;
+
+                    ctx.globalCompositeOperation = "destination-out";
+                    ctx.arc(x, y, 20, 0, 2 * Math.PI);
+                    ctx.fill();
+                    getFilledPercentage(ctx);
+
+                });
+
+                canvas.addEventListener('touchend', () => {
+                    isDraw = false;
                 })
                 // luckydraw('touchstart', 'touchmove', 'touchend')
             } else {
