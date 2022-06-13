@@ -18,6 +18,7 @@
             padding: 1rem;
             display: flex;
             justify-content: center;
+            position: fixed;
         }
 
         .card-wrapper {
@@ -58,7 +59,7 @@
                 canvas.addEventListener('touchstart', () => {
                     // isDraw = true;
                     console.log("isDraw:" + isDraw)
-                });
+                }, false);
 
                 canvas.addEventListener('touchmove', (event) => {
                     // if (!isDraw) return;
@@ -72,7 +73,7 @@
                     ctx.fill();
                     getFilledPercentage(ctx);
 
-                });
+                }, false);
 
                 // canvas.addEventListener('touchend', () => {
                 //     isDraw = false;
