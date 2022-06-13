@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh_TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *,
+        *::after,
+        *::before {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card-wrapper {
+            width: 500px;
+            height: 300px;
+            background-color: rgb(254, 155, 15);
+            background-image: url("https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80");
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card-wrapper">
+        <canvas id="canvas" width="500" height="300">
+
+        </canvas>
+
+    </div>
+
+    <script>
+        const canvas = document.querySelector('#canvas');
+        const phoneQuery = window.matchMedia("(max-width: 768px)")
+        const ctx = canvas.getContext('2d');
+        const width = 500;
+        const height = 300;
+        let isDraw = false;
+
+        // 判斷瀏覽器是否支援canvas
+        if (canvas.getContext) {
+            ctx.fillStyle = "#A9A9A9";
+            ctx.fillRect(0, 0, width, height);
+
+            // If media query matches
+            if (phoneQuery.matches) { 
+                luckydraw('touchstart', 'touchmove', 'touchend')
+            } else {
+                luckydraw('mousedown', 'mousemove', 'mouseup')
+            }
+        } else {
+            alert('此瀏覽器不支援canvas元素')
+        };
+
+
+        function luckydraw(start, move, end) {
+
+            canvas.addEventListener(start, () => {
+                isDraw = true;
+                console.log("isDraw:" + isDraw)
+            });
+
+            canvas.addEventListener(move, (event) => {
+                if (!isDraw) return;
+                const point = getClientOffset(event);
+
+                const x = point.x;
+                const y = point.y;
+
+                ctx.globalCompositeOperation = "destination-out";
+                ctx.arc(x, y, 20, 0, 2 * Math.PI);
+                ctx.fill();
+                getFilledPercentage(ctx);
+
+            });
+
+            canvas.addEventListener(end, () => {
+                isDraw = false;
+            })
+
+        }
+
+        function getClientOffset(event) {
+            // getBoundingClientRect() 抓取 canvas元素 相對於瀏覽器的資訊
+            const rect = canvas.getBoundingClientRect();
+            const point = {
+                // 滑鼠X座標 - canvas元素距離頁面左方的距離
+                x: event.clientX - rect.left,
+                // 滑鼠Y座標 - canvas元素距離頁面上方的距離
+                y: event.clientY - rect.top
+            }
+
+            return point;
+        }
+
+
+        // 判斷刮刮樂-透明區塊百分比 
+        const getFilledPercentage = (ctx) => {
+            const imgData = ctx.getImageData(0, 0, width, height);
+            let pixels = imgData.data;
+
+            let n = 0;
+            for (let i = 0; i < pixels.length; i += 1) {
+                // 代表rgba，alpha的值 < 128 為透明
+                if (pixels[i + 3] < 128) {
+                    n += 1;
+                }
+            }
+
+            // 當透明區塊>60%
+            if (n >= pixels.length * 0.6) {
+                ctx.globalCompositeOperation = "destination-over";
+                ctx.canvas.style.opacity = 0;
+            }
+        };
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
