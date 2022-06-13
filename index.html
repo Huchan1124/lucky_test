@@ -55,16 +55,16 @@
 
             // If media query matches
             if (phoneQuery.matches) {
-                luckydraw('touchstart', 'touchmove', 'touchend')
+               scratchCard('touchstart', 'touchmove', 'touchend')
             } else {
-                luckydraw('mousedown', 'mousemove', 'mouseup')
+               scratchCard('mousedown', 'mousemove', 'mouseup')
             }
         } else {
             alert('此瀏覽器不支援canvas元素')
         };
 
 
-        function luckydraw(start, move, end) {
+        function scratchCard(start, move, end) {
 
             canvas.addEventListener(start, () => {
                 isDraw = true;
