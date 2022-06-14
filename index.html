@@ -44,8 +44,9 @@
         const canvas = document.querySelector('#canvas');
         const phoneQuery = window.matchMedia("(max-width: 768px)")
         const ctx = canvas.getContext('2d');
-        const width = 300;
-        const height = 300;
+        const [width,height] = [300,300];
+        // const width = 300
+        // const height = 300
         let isDraw = false;
 
         // 判斷瀏覽器是否支援canvas
