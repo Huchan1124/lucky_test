@@ -132,8 +132,9 @@
 
             // 當透明區塊>60%
             if (n >= pixels.length * 0.6) {
-                ctx.globalCompositeOperation = "destination-over";
-                ctx.canvas.style.opacity = 0;
+                ctx.clearRect(0, 0, width, height);
+                // ctx.globalCompositeOperation = "destination-over";
+                // ctx.canvas.style.opacity = 0;
             }
         };
 
